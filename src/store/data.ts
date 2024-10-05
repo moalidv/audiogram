@@ -16,20 +16,29 @@ export const intensities = [
 let xCounter = 0;
 let yCounter = 0;
 
-frequancies.forEach((frq) => {
-  xCounter++;
-  if (xCounter == 10) xCounter = 1;
-  intensities.forEach((int) => {
-    buttons.push({
-      f: frq,
-      i: int,
-      x: xCounter * 10,
-      y: yCounter * 4,
-      clicked: false,
-    });
-    yCounter++;
-    if (yCounter == 25) yCounter = 0;
-  });
-});
+// frequancies.forEach((frq) => {
+//   xCounter++;
+//   if (xCounter == 10) xCounter = 1;
+//   intensities.forEach((int) => {
+//     buttons.push({
+//       f: frq,
+//       i: int,
+//       x: xCounter * 10,
+//       y: yCounter * 4,
+//       clicked: false,
+//     });
+//     yCounter++;
+//     if (yCounter == 25) yCounter = 0;
+//   });
+// });
+intensities.forEach((int, idx) => {
+  buttons.push({
+          f: .75,
+          i: int,
+          x: 10,
+          y: idx * 4,
+          clicked: false,
+        })
+})
 
 export default buttons;

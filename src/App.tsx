@@ -1,27 +1,24 @@
 import { useState } from "react";
 import "./App.css";
 import buttons from "./store/data";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { clickBtn } from "./store/buttonsSlice/buttonsSlice";
 
 function App() {
-  const [isClicked, setIsClicked] = useState(false);
+  const dispatch = useAppDispatch();
+  const {records} = useAppSelector(state => state.buttons)
   return (
     <div className="container">
       <svg className="graph" width={"40%"} height={"40%"}>
-        {buttons.map((btn, idx) => (
+        {records.map((btn, idx) => (
           <circle
             key={idx}
             cx={`${btn.x}%`}
             cy={`${btn.y}%`}
-            r={"2"}
-            fill={isClicked ? "red" : "black"}
+            r={btn.clicked? "4" : "2"}
+            fill={btn.clicked? "red" : "black"}
             onClick={() => {
-              if (btn.clicked) {
-                setIsClicked(true);
-                btn.clicked = false;
-              } else {
-                setIsClicked(false);
-                btn.clicked = true;
-              }
+              dispatch(clickBtn(`${btn.x}_${btn.y}`))
             }}
           />
         ))}
