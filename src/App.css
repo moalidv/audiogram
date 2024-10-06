@@ -1,13 +1,12 @@
 .container {
-  height: 100vh;
+	height: 100vh;
 }
-
 .graph {
-  background: gainsboro;
+	background: gainsboro;
 }
 
-.circle:hover {
-  cursor: pointer;
-  fill: red;
-  transform: scale(2,2);
+.circle :hover {
+	cursor: pointer;
+	fill: red;
+	transform: scale(2, 2);
 }

@@ -1,28 +1,27 @@
-import { useState } from "react";
 import "./App.css";
-import buttons from "./store/data";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { clickBtn } from "./store/buttonsSlice/buttonsSlice";
+import { blockColumnBtns, clickBtn } from "./store/buttonsSlice/buttonsSlice";
 
 function App() {
-  const dispatch = useAppDispatch();
-  const {records} = useAppSelector(state => state.buttons)
-  return (
-    <div className="container">
-      <svg className="graph" width={"40%"} height={"40%"}>
-        {records.map((btn, idx) => (
-          <circle
-            key={idx}
-            cx={`${btn.x}%`}
-            cy={`${btn.y}%`}
-            r={btn.clicked? "4" : "2"}
-            fill={btn.clicked? "red" : "black"}
-            onClick={() => {
-              dispatch(clickBtn(`${btn.x}_${btn.y}`))
-            }}
-          />
-        ))}
-        {/* <circle cx={"10%"} cy={"0"} r={3} fill={"red"} />
+	const dispatch = useAppDispatch();
+	const { records } = useAppSelector((state) => state.buttons);
+	return (
+		<div className="container">
+			<svg className="graph" width={"40%"} height={"40%"}>
+				{records.map((btn, idx) => (
+					<circle
+						className="circle"
+						key={idx}
+						cx={`${btn.x}%`}
+						cy={`${btn.y}%`}
+						r={btn.clicked ? "6" : "4"}
+						fill={btn.clicked && !btn.blocked ? "red" : "black"}
+						onClick={() => {
+							dispatch(clickBtn(`${btn.x}_${btn.y}`));
+						}}
+					/>
+				))}
+				{/* <circle cx={"10%"} cy={"0"} r={3} fill={"red"} />
         <circle cx={"20%"} cy={"0"} r={3} fill={"red"} />
         <circle cx={"30%"} cy={"0"} r={3} fill={"red"} />
         <circle cx={"40%"} cy={"0"} r={3} fill={"red"} />
@@ -32,9 +31,9 @@ function App() {
         <circle cx={"80%"} cy={"0"} r={3} fill={"red"} />
         <circle cx={"90%"} cy={"0"} r={3} fill={"red"} />
         <circle cx={"100%"} cy={"0"} r={3} fill={"red"} /> */}
-      </svg>
-    </div>
-  );
+			</svg>
+		</div>
+	);
 }
 
 export default App;
