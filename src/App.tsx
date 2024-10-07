@@ -1,31 +1,43 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { blockOtherBtns, toggleBtn } from "./store/freq250/freq250Slice";
 import { clickBtn } from "./store/buttonsSlice/buttonsSlice";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import RightDiagram from "./components/RightDiagram";
+import LeftDiagram from "./components/LeftDiagram";
 
 function App() {
-  const dispatch = useAppDispatch();
-  const { records } = useAppSelector((state) => state.buttons);
-  return (
-    <div className="container">
-      <svg className="graph" width={"40%"} height={"40%"}>
-        {records.map((btn, idx) => (
-          <circle
-            className="circle"
-            key={idx}
-            cx={`${btn.x}%`}
-            cy={`${btn.y}%`}
-            r={btn.clicked && !btn.blocked ? "6" : "4"}
-            fill={btn.clicked && !btn.blocked ? "red" : "black"}
-            onClick={() => {
-              dispatch(clickBtn(`${btn.x}_${btn.y}`));
-              // dispatch(blockOtherBtns(btn.y));
-            }}
-          />
-        ))}
-      </svg>
-    </div>
-  );
+	const dispatch = useAppDispatch();
+	const { records } = useAppSelector((state) => state.buttons);
+
+	const [selectedBtns, setSelectedBtns] = useState<string[]>([
+		"10_null",
+		"20_null",
+		"30_null",
+		"40_null",
+		"50_null",
+		"60_null",
+		"70_null",
+		"80_null",
+		"90_null",
+	]);
+	const [drawable, setDrawable] = useState(false);
+
+	console.log(selectedBtns, drawable);
+
+	useEffect(() => {
+		selectedBtns.forEach((item) => {
+			if (item.split("_")[1] == "null") {
+				return setDrawable(false);
+			}
+			setDrawable(true);
+		});
+	});
+	return (
+		<div className="container">
+			<RightDiagram />
+			<LeftDiagram />
+		</div>
+	);
 }
 
 export default App;

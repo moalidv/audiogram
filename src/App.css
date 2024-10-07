@@ -1,8 +1,21 @@
 .container {
 	height: 100vh;
+	display: flex;
+
+	/* flex-grow: 1; */
+	justify-content: space-around;
+
+	background-color: red;
 }
+
+.graph_container {
+	width: 100%;
+}
+
 .graph {
 	background: gainsboro;
+	width: 100%;
+	height: 40%;
 }
 
 .circle :hover {
